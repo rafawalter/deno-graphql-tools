@@ -37,5 +37,15 @@ const addDinosaur = async(args: any) => {
 const connect = async () => {
   const databaseUrl = Deno.env.get("DATABASE_URL")
   const pool = new postgres.Poll(databaseUrl, 3, true)
-  return await pool.connect()
+  const connection =  await pool.connect()
+  try {
+    // Create the table
+    await connection.queryObject`
+    CREATE TABLE IF NOT EXISTS dinosaurs (
+      name TEXT PRIMARY KEY,
+      description TEXT
+    )
+  `;
+  }
+  return connection
 }
