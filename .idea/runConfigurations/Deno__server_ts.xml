@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Deno: server.ts" type="DenoConfigurationType" inputPath="$PROJECT_DIR$/server.ts" programParameters="run --allow-net --allow-env">
     <option name="envs">
-      <entry key="DATABASE_URL" value="postgres://postgres:zaSce2-kosnit-murrox@db.gzqxiunrgxeussfrmmvt.supabase.co:6543/postgres" />
+      <entry key="DATABASE_URL" value="postgres://postgres:pab5JEOUW644JxYo@db.sbcrzmslzwrfsgkzrfrj.supabase.co:6543/postgres" />
     </option>
     <method v="2" />
   </configuration>
