@@ -20,5 +20,6 @@ const server = new Server({
   port: 3000,
 })
 
-console.log('Starting dinosearch at http://localhost:3000/graphql ...')
 server.listenAndServe()
+
+console.log('dinosearch available at http://localhost:3000/graphql')
