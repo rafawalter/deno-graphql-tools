@@ -1,4 +1,5 @@
 import * as postgres from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+
 export const resolvers = {
   Query: {
     hello: () => `Hello, World!`,
@@ -6,11 +7,11 @@ export const resolvers = {
     oneDinosaur: (_: any, args: any) => oneDinosaur(args)
   },
   Mutation: {
-    addDinousaur: (_: any, args: any) => addDinosaur(args)
+    addDinosaur: (_: any, args: any) => addDinosaur(args)
   }
 }
 
-const allDinosaurs = async() => {
+const allDinosaurs = async () => {
   const connection = await connect()
   const result = await connection.queryObject`
     SELECT name, description FROM dinosaurs
@@ -18,7 +19,7 @@ const allDinosaurs = async() => {
   return result.rows
 }
 
-const oneDinosaur = async(args: any) => {
+const oneDinosaur = async (args: any) => {
   const connection = await connect()
   const result = await connection.queryObject`
     SELECT name, description FROM dinosaurs WHERE name = ${args.name}
@@ -26,7 +27,7 @@ const oneDinosaur = async(args: any) => {
   return result.rows
 }
 
-const addDinosaur = async(args: any) => {
+const addDinosaur = async (args: any) => {
   const connection = await connect()
   const result = await connection.queryObject`
   INSERT INTO dinosaurs(name,description) VALUES (${args.name}, ${args.description}) RETURNING name, description
@@ -35,17 +36,15 @@ const addDinosaur = async(args: any) => {
 }
 
 const connect = async () => {
-  const databaseUrl = Deno.env.get("DATABASE_URL")
-  const pool = new postgres.Poll(databaseUrl, 3, true)
-  const connection =  await pool.connect()
-  try {
-    // Create the table
-    await connection.queryObject`
+  const databaseUrl = Deno.env.get("DATABASE_URL")!
+  const pool = new postgres.Pool(databaseUrl, 3, true)
+  const connection = await pool.connect()
+  // Create the table
+  await connection.queryObject`
     CREATE TABLE IF NOT EXISTS dinosaurs (
       name TEXT PRIMARY KEY,
       description TEXT
     )
   `;
-  }
   return connection
 }
