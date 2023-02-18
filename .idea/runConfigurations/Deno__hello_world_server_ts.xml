@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Deno: hello_world_server.ts" type="DenoConfigurationType" nameIsGenerated="true" inputPath="$PROJECT_DIR$/hello_world_server.ts" programParameters="run --allow-net">
+    <method v="2" />
+  </configuration>
+</component>
